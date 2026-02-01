@@ -12,6 +12,7 @@ import {
   useRenameFile,
   useDeleteFile,
 } from "@/features/projects/hooks/use-files";
+import { useEditor } from "@/features/editor/hooks/use-editor";
 
 import { getItemPadding } from "./constants";
 import { LoadingRow } from "./loading-row";
@@ -19,7 +20,6 @@ import { CreateInput } from "./create-input";
 import { RenameInput } from "./rename-input";
 import { TreeItemWrapper } from "./tree-item-wrapper";
 import { Doc, Id } from "../../../../../convex/_generated/dataModel";
-import { useEditor } from "@/features/editor/hooks/use-editor";
 
 export const Tree = ({
   item,
@@ -34,8 +34,14 @@ export const Tree = ({
   const [isRenaming, setIsRenaming] = useState(false);
   const [creating, setCreating] = useState<"file" | "folder" | null>(null);
 
-  const renameFile = useRenameFile();
-  const deleteFile = useDeleteFile();
+  const renameFile = useRenameFile({
+    projectId,
+    parentId: item.parentId,
+  });
+  const deleteFile = useDeleteFile({
+    projectId,
+    parentId: item.parentId,
+  });
   const createFile = useCreateFile();
   const createFolder = useCreateFolder();
 
