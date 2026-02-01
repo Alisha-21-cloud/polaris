@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/static-components */
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -10,13 +11,13 @@ import {
   useMemo,
 } from "react";
 
-export interface TextShimmerProps {
+export type TextShimmerProps = {
   children: string;
   as?: ElementType;
   className?: string;
   duration?: number;
   spread?: number;
-}
+};
 
 const ShimmerComponent = ({
   children,
